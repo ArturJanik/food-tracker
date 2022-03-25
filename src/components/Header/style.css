@@ -1,13 +1,11 @@
 .header {
-	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 56px;
 	padding: 0;
-	background: #673AB7;
+	background: #fff;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-	z-index: 50;
 }
 
 .header h1 {
@@ -17,7 +15,7 @@
 	font-size: 24px;
 	line-height: 56px;
 	font-weight: 400;
-	color: #FFF;
+	color: #263276;
 }
 
 .header nav {
@@ -34,15 +32,17 @@
 	text-align: center;
 	background: rgba(255,255,255,0);
 	text-decoration: none;
-	color: #FFF;
+	color: #263276;
 	will-change: background-color;
 }
 
 .header nav a:hover,
 .header nav a:active {
-	background: rgba(0,0,0,0.2);
+	background: rgba(38, 50, 118, .1);
 }
 
 .header nav a.active {
-	background: rgba(0,0,0,0.4);
+	background: rgba(38, 50, 118, 1);
+	color: #fff;
+	font-weight: 600;
 }

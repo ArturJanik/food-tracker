@@ -1,0 +1,38 @@
+.heading {
+    color: #263276;
+    font-family: Lato, sans-serif;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+}
+
+.h1 {
+    composes: heading;
+    font-size: 32px;
+}
+
+.h2 {
+    composes: heading;
+    font-size: 28px;
+}
+
+.h3 {
+    composes: heading;
+    font-size: 24px;
+}
+
+.h4 {
+    composes: heading;
+    font-size: 21px;
+}
+
+.h5 {
+    composes: heading;
+    font-size: 18px;
+}
+
+.h6 {
+    composes: heading;
+    font-size: 16px;
+    font-weight: 600;
+}
