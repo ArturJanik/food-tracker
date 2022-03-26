@@ -1,26 +1,23 @@
+import { useStore } from '@nanostores/preact';
 import { FunctionalComponent, h } from 'preact';
+import { selectedDate, setNextDay, setPrevDay } from '../../../store/settings';
 import style from './style.css';
 
-interface DateSelectorProps {
-    selected: Date;
-    onSelect: (date: Date) => void;
-}
+const DateSelector: FunctionalComponent = () => {
+    const date = useStore(selectedDate);
 
-const DateSelector: FunctionalComponent<DateSelectorProps> = ({ selected, onSelect }) => {
     const selectNextDay = () => {
-        const nextDay = selected.setDate(selected.getDate() + 1);
-        onSelect(new Date(nextDay));
+        setNextDay();
     }
     
     const selectPrevDay = () => {
-        const prevDay = selected.setDate(selected.getDate() - 1);
-        onSelect(new Date(prevDay));
+        setPrevDay();
     }
 
     return (
         <div class={style.dateSelector}>
             <div class={style.btn} onClick={selectPrevDay}>&laquo;</div>
-            {selected.toLocaleDateString()}
+            {date.toLocaleDateString()}
             <div class={style.btn} onClick={selectNextDay}>&raquo;</div>
         </div>
     );

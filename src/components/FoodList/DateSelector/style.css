@@ -8,6 +8,11 @@
 
 .btn {
     background: #fff;
-    border: 1px solid #eee;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+    cursor: pointer;
     padding: 16px;
+}
+
+.btn:active:hover {
+    background: #eee;
 }
