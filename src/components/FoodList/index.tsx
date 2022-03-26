@@ -1,5 +1,6 @@
 import { FunctionalComponent, h } from 'preact';
 import { FoodModel } from '../../models/Food.model';
+import { addNote } from '../../store/foodnotes';
 import Food from './Food';
 import style from './style.css';
 
@@ -15,8 +16,8 @@ const foods: FoodModel[] = [
 
 const FoodList: FunctionalComponent = () => {
 
-    const addToFoodnotes = (id: number) => {
-        console.log(id);
+    const addToFoodnotes = (foodId: number) => {
+        addNote({ foodId });
     }
 
     return (
