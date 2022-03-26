@@ -1,0 +1,13 @@
+.dateSelector {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.btn {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 16px;
+}

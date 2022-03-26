@@ -1,6 +1,8 @@
-import { FunctionalComponent, h } from 'preact';
+import { FunctionalComponent, h, Fragment } from 'preact';
+import { useState } from 'preact/hooks';
 import { FoodModel } from '../../models/Food.model';
 import { addNote } from '../../store/foodnotes';
+import DateSelector from './DateSelector';
 import Food from './Food';
 import style from './style.css';
 
@@ -15,15 +17,19 @@ const foods: FoodModel[] = [
 ];
 
 const FoodList: FunctionalComponent = () => {
+    const [date, setDate] = useState<Date>(new Date());
 
     const addToFoodnotes = (foodId: number) => {
-        addNote({ foodId });
+        addNote({ foodId, date });
     }
 
     return (
-        <div class={style.list}>
-            {foods.map((food) => <Food data={food} onClick={addToFoodnotes} />)}
-        </div>
+        <>
+            <DateSelector onSelect={setDate} selected={date} />
+            <div class={style.list}>
+                {foods.map((food) => <Food data={food} onClick={addToFoodnotes} />)}
+            </div>
+        </>
     );
 };
 
