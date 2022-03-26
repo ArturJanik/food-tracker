@@ -1,0 +1,32 @@
+.overlay {
+    background: rgba(0,0,0,.2);
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.sidebarWrapper {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 56px;
+    width: 320px;
+    z-index: 90;
+}
+
+.sidebar {
+    padding: 16px;
+    pointer-events: all;
+    width: 100%;
+}
+

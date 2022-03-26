@@ -1,48 +1,20 @@
 .header {
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 56px;
-	padding: 0;
 	background: #fff;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	display: flex;
+	height: 56px;
+	justify-content: space-between;
+	left: 0;
+	padding: 0;
+	top: 0;
+	width: 100%;
 }
 
 .header h1 {
-	float: left;
+	color: #263276;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 56px;
 	margin: 0;
 	padding: 0 15px;
-	font-size: 24px;
-	line-height: 56px;
-	font-weight: 400;
-	color: #263276;
-}
-
-.header nav {
-	float: right;
-	font-size: 100%;
-}
-
-.header nav a {
-	display: inline-block;
-	height: 56px;
-	line-height: 56px;
-	padding: 0 15px;
-	min-width: 50px;
-	text-align: center;
-	background: rgba(255,255,255,0);
-	text-decoration: none;
-	color: #263276;
-	will-change: background-color;
-}
-
-.header nav a:hover,
-.header nav a:active {
-	background: rgba(38, 50, 118, .1);
-}
-
-.header nav a.active {
-	background: rgba(38, 50, 118, 1);
-	color: #fff;
-	font-weight: 600;
 }

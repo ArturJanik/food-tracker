@@ -1,7 +1,7 @@
 import { FunctionalComponent, h } from 'preact';
 import style from './style.css';
 
-type IconType = 'trash-can' | 'pencil' | 'calendar';
+type IconType = 'trash-can' | 'pencil' | 'calendar' | 'gears-solid';
 
 interface IconProps {
     type: IconType;

@@ -57,7 +57,6 @@ const updateTotals = (date: string) => {
                 sumProt += food.prot;
             }
         })
-        console.log(note.foodIds)
     }
 
     totalKcal.set(sumKcal);

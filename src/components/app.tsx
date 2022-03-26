@@ -4,6 +4,7 @@ import { Route, Router } from 'preact-router';
 import Home from '../routes/home';
 import NotFoundPage from '../routes/notfound';
 import Header from './Header';
+import Sidebar from './UI/Sidebar';
 
 const App: FunctionalComponent = () => {
     return (
@@ -13,6 +14,7 @@ const App: FunctionalComponent = () => {
                 <Route path="/" component={Home} />
                 <NotFoundPage default />
             </Router>
+            <Sidebar />
         </div>
     );
 };
