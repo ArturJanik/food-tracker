@@ -4,10 +4,13 @@
     margin-bottom: 8px;
 }
 
+.flexWrapper {
+    display: flex;
+}
+
 .barContainer {
     border: 1px solid #ddd;
-    height: 30px;
-    margin-bottom: 4px;
+    height: 51px;
     position: relative;
     text-align: center;
     width: 100%;
@@ -16,7 +19,7 @@
 .bar {
     background: rgb(97, 138, 21);
     display: block;
-    height: 30px;
+    height: 51px;
     left: 0;
     position: absolute;
     opacity: 0.5;
@@ -30,5 +33,5 @@
 
 .text {
     font-weight: 600;
-    line-height: 30px;
+    line-height: 51px;
 }

@@ -3,9 +3,13 @@ import { FunctionalComponent, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import {  totalKcal, totalProt } from '../../store/foodnotes';
 import { kcalGoal, protGoal } from '../../store/settings';
+import { resetSidebar, runSidebar, sidebar } from '../../store/sidebar';
+import Button from '../UI/Button';
 import style from './style.css';
 
 const Summary: FunctionalComponent = () => {
+    const { type } = useStore(sidebar);
+
     const [kcalBarWidth, setKcalBarWidth] = useState(0);
     const [protBarWidth, setProtBarWidth] = useState(0);
     const targetKcal = useStore(kcalGoal);
@@ -26,6 +30,14 @@ const Summary: FunctionalComponent = () => {
         setProtBarWidth(pBarWidth);
 
     }, [kcal, prot]);
+    
+    const toggleNotesList = () => {
+        if (type === 'INACTIVE') {
+            runSidebar(<div>abcdef</div>);
+        } else {
+            resetSidebar();
+        }
+    }
 
     const kcalBarClass = kcalBarWidth === 100 ? style.redBar : style.bar;
 
@@ -33,11 +45,14 @@ const Summary: FunctionalComponent = () => {
         <div class={style.summary}>
             <div class={style.barContainer}>
                 <div class={kcalBarClass} style={{ width: kcalBarWidth + '%' }}></div>
-                <div class={style.text}>Kcal: {kcal}/{targetKcal}kcal</div>
+                <div class={style.text}>Kcal: {Math.floor(kcal)}/{targetKcal}kcal</div>
             </div>
-            <div class={style.barContainer}>
-                <div class={style.bar} style={{ width: protBarWidth + '%' }}></div>
-                <p class={style.text}>Prot: {prot}/{targetProt}g</p>
+            <div class={style.flexWrapper}>
+                <div class={style.barContainer}>
+                    <div class={style.bar} style={{ width: protBarWidth + '%' }}></div>
+                    <p class={style.text}>Prot: {Math.floor(prot)}/{targetProt}g</p>
+                </div>
+                <Button onClick={toggleNotesList}>All notes</Button>
             </div>
         </div>
     );
