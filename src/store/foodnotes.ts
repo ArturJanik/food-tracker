@@ -13,17 +13,18 @@ const foods: FoodModel[] = [
     { id: 7, name: 'Mus jabłko', kcal: 100, prot: 0, unit: 'szt', amount: 1 },
 ];
 
-interface AddFoodnoteActionPayload {
+interface FoodnoteActionPayload {
     date: Date;
     foodId: number;
 }
 
 export const foodNotes = atom<FoodNoteModel[]>([]);
+export const notedFoods = atom<FoodModel[]>([]);
 export const lastFoodNoteId = atom<number>(0);
 export const totalKcal = atom<number>(0);
 export const totalProt = atom<number>(0);
 
-export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId }: AddFoodnoteActionPayload) => {
+export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
     const stringDate = date.toLocaleDateString();
 
     let note = store.get().find((n) => n.date === stringDate);
@@ -42,6 +43,23 @@ export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId 
     }
 
     updateTotals(stringDate);
+});
+
+export const removeNote = action(foodNotes, 'Remove Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
+    const stringDate = date.toLocaleDateString();
+
+    const notes = store.get();
+    const note = notes.find((n) => n.date === stringDate);
+
+    if (note) {
+        const noteIndex = notes.findIndex((n) => n.id === note?.id);
+        const updatedFoods = note.foodIds.filter((id, index) => index !== note.foodIds.indexOf(foodId));
+        store.set([
+            ...notes.slice(0, noteIndex),
+            { ...note, foodIds: updatedFoods },
+            ...notes.slice(noteIndex + 1),
+        ]);
+    }
 });
 
 const updateTotals = (date: string) => {
@@ -63,7 +81,30 @@ const updateTotals = (date: string) => {
     totalProt.set(sumProt);
 }
 
+const updateNotedFoods = (date: string) => {
+    const notes: FoodModel[] = [];
+
+    let note = foodNotes.get().find((n) => n.date === date);
+    if (note) {
+        note.foodIds.forEach((foodId) => {
+            const food = foods.find((f) => f.id === foodId);
+            if (food) {
+                notes.push(food);
+            }
+        });
+    }
+
+    notedFoods.set(notes);
+}
+
 selectedDate.listen((newDate) => {
     const date = newDate.toLocaleDateString();
     updateTotals(date);
+    updateNotedFoods(date);
+});
+
+foodNotes.listen(() => {
+    const date = selectedDate.get().toLocaleDateString()
+    updateTotals(date);
+    updateNotedFoods(date);
 });

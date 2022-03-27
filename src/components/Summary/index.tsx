@@ -4,6 +4,7 @@ import { useEffect, useState } from 'preact/hooks';
 import {  totalKcal, totalProt } from '../../store/foodnotes';
 import { kcalGoal, protGoal } from '../../store/settings';
 import { resetSidebar, runSidebar, sidebar } from '../../store/sidebar';
+import NoteList from '../NoteList';
 import Button from '../UI/Button';
 import style from './style.css';
 
@@ -33,7 +34,7 @@ const Summary: FunctionalComponent = () => {
     
     const toggleNotesList = () => {
         if (type === 'INACTIVE') {
-            runSidebar(<div>abcdef</div>);
+            runSidebar(<NoteList />);
         } else {
             resetSidebar();
         }

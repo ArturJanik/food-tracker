@@ -1,25 +1,28 @@
 import { useStore } from '@nanostores/preact';
 import { FunctionalComponent, h, Fragment } from 'preact';
-import { useState } from 'preact/hooks';
-import { FoodModel } from '../../models/Food.model';
-import { addNote } from '../../store/foodnotes';
+import { notedFoods } from '../../store/foodnotes';
+import { removeNote } from '../../store/foodnotes';
 import { selectedDate } from '../../store/settings';
 import style from './style.css';
 
-interface NoteListProps {
-    foods: FoodModel[];
-}
-
-const NoteList: FunctionalComponent<NoteListProps> = ({ foods }) => {
+const NoteList: FunctionalComponent = () => {
     const date = useStore(selectedDate);
+    const foods = useStore(notedFoods);
 
     const deleteFoodnode = (foodId: number) => {
-        // addNote({ date, foodId });
+        removeNote({ date, foodId });
     }
 
     return (
         <>
+            <div class={style.title}>{date.toLocaleDateString()} foods</div>
             <div class={style.list}>
+                {foods.map((food) => <div class={style.food}>
+                    <div class={style.name}>{food.name} ({food.amount}{food.unit})</div>
+                    <div class={style.kcal}>{food.kcal}kcal</div>
+                    <div class={style.prot}>{food.prot}g</div>
+                    <div onClick={() => deleteFoodnode(food.id)}>✖</div>
+                </div>)}
             </div>
         </>
     );
