@@ -1,6 +1,6 @@
 .home {
 	background: #f8f9fb;
 	padding: 20px;
-	min-height: 100%;
-	width: 100%;
+    margin: 0 auto;
+    max-width: 1280px;
 }

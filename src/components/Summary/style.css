@@ -3,3 +3,32 @@
     box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
     margin-bottom: 8px;
 }
+
+.barContainer {
+    border: 1px solid #ddd;
+    height: 30px;
+    margin-bottom: 4px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.bar {
+    background: rgb(97, 138, 21);
+    display: block;
+    height: 30px;
+    left: 0;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+}
+
+.redBar {
+    composes: bar;
+    background: rgb(138, 35, 21);
+}
+
+.text {
+    font-weight: 600;
+    line-height: 30px;
+}

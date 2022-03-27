@@ -8,10 +8,10 @@ import Sidebar from './UI/Sidebar';
 
 const App: FunctionalComponent = () => {
     return (
-        <div id="preact_root">
+        <div id='preact_root'>
             <Header />
             <Router>
-                <Route path="/" component={Home} />
+                <Route path='/' component={Home} />
                 <NotFoundPage default />
             </Router>
             <Sidebar />

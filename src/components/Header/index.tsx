@@ -20,7 +20,7 @@ const Header: FunctionalComponent = () => {
     return (
         <header class={style.header}>
             <h1>LazyFoodnote</h1>
-            <Button onClick={toggleSettings}><Icon type="gears-solid" classes={style.icon} /></Button>
+            <Button onClick={toggleSettings}><Icon type='gears-solid' classes={style.icon} /></Button>
         </header>
     );
 };
