@@ -1,17 +1,8 @@
 import { action, atom } from 'nanostores';
 import { FoodModel } from '../models/Food.model';
 import { FoodNoteModel } from '../models/FoodNote.model';
+import { foods } from './foods';
 import { selectedDate } from './settings';
-
-const foods: FoodModel[] = [
-    { id: 1, name: 'Valio', kcal: 140, prot: 20, unit: 'szt', amount: 1 },
-    { id: 2, name: 'Chleb pszenny', kcal: 26, prot: 1, unit: 'g', amount: 10 },
-    { id: 3, name: 'Ser edam rycki', kcal: 35, prot: 2.6, unit: 'g', amount: 10 },
-    { id: 4, name: 'Kawa z mlekiem', kcal: 90, prot: 5, unit: 'szt', amount: 1 },
-    { id: 5, name: 'Białko', kcal: 130, prot: 26, unit: 'szt', amount: 1 },
-    { id: 6, name: 'Fruvita', kcal: 170, prot: 18, unit: 'szt', amount: 1 },
-    { id: 7, name: 'Mus jabłko', kcal: 100, prot: 0, unit: 'szt', amount: 1 },
-];
 
 interface FoodnoteActionPayload {
     date: Date;
@@ -69,7 +60,7 @@ const updateTotals = (date: string) => {
     const note = foodNotes.get().find((n) => n.date === date);
     if (note) {
         note.foodIds.forEach((id) => {
-            const food = foods.find((f) => f.id === id);
+            const food = foods.get().find((f) => f.id === id);
             if (food) {
                 sumKcal += food.kcal;
                 sumProt += food.prot;
@@ -87,7 +78,7 @@ const updateNotedFoods = (date: string) => {
     let note = foodNotes.get().find((n) => n.date === date);
     if (note) {
         note.foodIds.forEach((foodId) => {
-            const food = foods.find((f) => f.id === foodId);
+            const food = foods.get().find((f) => f.id === foodId);
             if (food) {
                 notes.push(food);
             }

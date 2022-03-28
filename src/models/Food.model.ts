@@ -6,3 +6,5 @@ export interface FoodModel {
     kcal: number;
     prot: number;
 }
+
+export type FoodDraft = Omit<FoodModel, 'id'>;

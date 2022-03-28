@@ -17,7 +17,7 @@ const Settings: FunctionalComponent = () => {
                 type='number'
                 id='kcalInput'
                 name='kcalInput'
-                onInput={(e) => setKcalGoal({ goal: e.currentTarget.value as unknown as number })}
+                onInput={(e) => setKcalGoal({ goal: parseInt(e.currentTarget.value) })}
                 placeholder='Set daily kcal goal'
                 value={kcal}
             />
@@ -26,7 +26,7 @@ const Settings: FunctionalComponent = () => {
                 type='number'
                 id='protInput'
                 name='protInput'
-                onInput={(e) => setProtGoal({ goal: e.currentTarget.value as unknown as number })}
+                onInput={(e) => setProtGoal({ goal: parseInt(e.currentTarget.value) })}
                 placeholder='Set daily prot goal'
                 value={prot}
             />
