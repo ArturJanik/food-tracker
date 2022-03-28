@@ -9,3 +9,23 @@
 .item:active:hover {
     background: #eee;
 }
+
+.name {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.amount {
+    color: #6574ca;
+}
+
+.data {
+    display: flex;
+}
+
+.kcal,
+.prot {
+    border: 1px solid #eee;
+    flex: 1;
+    padding: 4px;
+}

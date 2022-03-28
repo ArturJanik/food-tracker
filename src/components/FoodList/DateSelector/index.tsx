@@ -17,7 +17,7 @@ const DateSelector: FunctionalComponent = () => {
     return (
         <div class={style.dateSelector}>
             <div class={style.btn} onClick={selectPrevDay}>&laquo;</div>
-            {date.toLocaleDateString()}
+            <div class={style.date}>{date.toLocaleDateString()}</div>
             <div class={style.btn} onClick={selectNextDay}>&raquo;</div>
         </div>
     );

@@ -21,7 +21,7 @@ const NoteList: FunctionalComponent = () => {
                     <div class={style.name}>{food.name} ({food.amount}{food.unit})</div>
                     <div class={style.kcal}>{food.kcal}kcal</div>
                     <div class={style.prot}>{food.prot}g</div>
-                    <div onClick={() => deleteFoodnode(food.id)}>✖</div>
+                    <div onClick={() => deleteFoodnode(food.id)} class={style.btn}>remove</div>
                 </div>)}
             </div>
         </>

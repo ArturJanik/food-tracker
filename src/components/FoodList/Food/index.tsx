@@ -11,10 +11,11 @@ const Food: FunctionalComponent<FoodProps> = ({ data, onClick }) => {
     const { id, name, kcal, amount, unit, prot } = data;
     return (
         <div class={style.item} onClick={() => onClick(id)}>
-            <div>{name}</div>
-            <div>{amount}{unit}</div>
-            <div>{kcal}kcal</div>
-            <div>Prot: {prot}g</div>
+            <div class={style.name}>{name} (<span class={style.amount}>{amount}{unit}</span>)</div>
+            <div class={style.data}>
+                <div class={style.kcal}>{kcal}kcal</div>
+                <div class={style.prot}>Prot: {prot}g</div>
+            </div>
         </div>
     );
 };

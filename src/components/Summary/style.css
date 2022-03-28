@@ -10,7 +10,9 @@
 
 .barContainer {
     border: 1px solid #ddd;
-    height: 51px;
+    border-radius: 4px;
+    height: 52px;
+    overflow: hidden;
     position: relative;
     text-align: center;
     width: 100%;
@@ -19,7 +21,7 @@
 .bar {
     background: rgb(97, 138, 21);
     display: block;
-    height: 51px;
+    height: 52px;
     left: 0;
     position: absolute;
     opacity: 0.5;
@@ -33,5 +35,5 @@
 
 .text {
     font-weight: 600;
-    line-height: 51px;
+    line-height: 52px;
 }
