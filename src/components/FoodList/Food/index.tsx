@@ -4,7 +4,7 @@ import style from './style.css';
 
 interface FoodProps {
     data: FoodModel;
-    onClick: (id: number) => void;
+    onClick: (id: string) => void;
 }
 
 const Food: FunctionalComponent<FoodProps> = ({ data, onClick }) => {

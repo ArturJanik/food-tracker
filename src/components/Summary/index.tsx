@@ -20,7 +20,7 @@ const Summary: FunctionalComponent = () => {
 
     useEffect(() => {
         let kBarWidth = (kcal/targetKcal) * 100;
-        let pBarWidth = (kcal/targetKcal) * 100;
+        let pBarWidth = (prot/targetProt) * 100;
         if (kBarWidth > 100) {
             kBarWidth = 100;
         }

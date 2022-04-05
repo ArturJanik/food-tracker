@@ -4,53 +4,76 @@ import { FoodNoteModel } from '../models/FoodNote.model';
 import { foods } from './foods';
 import { selectedDate } from './settings';
 
+
+interface GetFoodnotesResponse {
+    foodnotes: FoodNoteModel[];
+}
 interface FoodnoteActionPayload {
     date: Date;
-    foodId: number;
+    foodId: string;
 }
+
+const API_URL = 'https://api.codeplayground.usermd.net/api';
 
 export const foodNotes = atom<FoodNoteModel[]>([]);
 export const notedFoods = atom<FoodModel[]>([]);
-export const lastFoodNoteId = atom<number>(0);
+export const foodnotesLoading = atom(false);
 export const totalKcal = atom<number>(0);
 export const totalProt = atom<number>(0);
 
+export const getFoodnotes = action(foodNotes, 'Get All Foodnotes', (store) => {
+    foodnotesLoading.set(true);
+    fetch(`${API_URL}/foodnote/all`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then<GetFoodnotesResponse>((res) => res.json())
+    .then((res) => {
+        if ('error' in res) {
+            console.log('error:', res);
+        } else {
+            const { foodnotes } = res;
+            store.set(foodnotes);
+        }
+        foodnotesLoading.set(false);
+    });
+});
+
 export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
     const stringDate = date.toLocaleDateString();
-
-    let note = store.get().find((n) => n.date === stringDate);
-    if (note) {
-        note = { ...note, foodIds: [...note.foodIds, foodId] };
-        store.set(store.get().map((n) => n.id === note?.id ? note : n));
-    } else {
-        const newId = lastFoodNoteId.get() + 1;
-        note = {
-            id: newId,
-            date: stringDate,
-            foodIds: [foodId],
-        };
-        store.set([...store.get(), note]);
-        lastFoodNoteId.set(newId);
-    }
-
-    updateTotals(stringDate);
+    
+    fetch(`${API_URL}/foodnote`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ date: stringDate, foodId }),
+    })
+    .then((res) => res.json())
+    .then((foodnote: FoodNoteModel) => {
+        const toUpdate = store.get().filter((note) => note.date !== stringDate);
+        store.set([...toUpdate, foodnote]);
+    })
+    .catch((err) => console.log(err));
 });
 
 export const removeNote = action(foodNotes, 'Remove Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
     const stringDate = date.toLocaleDateString();
-
-    const notes = store.get();
-    const note = notes.find((n) => n.date === stringDate);
-
-    if (note) {
-        const noteIndex = notes.findIndex((n) => n.id === note?.id);
-        const updatedFoods = note.foodIds.filter((id, index) => index !== note.foodIds.indexOf(foodId));
-        store.set([
-            ...notes.slice(0, noteIndex),
-            { ...note, foodIds: updatedFoods },
-            ...notes.slice(noteIndex + 1),
-        ]);
-    }
+    
+    fetch(`${API_URL}/foodnote/remove-food`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ foodId, date: stringDate }),
+    })
+    .then((res) => res.json())
+    .then((foodnote: FoodNoteModel) => {
+        const toUpdate = store.get().filter((note) => note.date !== stringDate);
+        store.set([...toUpdate, foodnote]);
+    })
+    .catch((err) => console.log(err));
 });
 
 const updateTotals = (date: string) => {
@@ -76,6 +99,7 @@ const updateNotedFoods = (date: string) => {
     const notes: FoodModel[] = [];
 
     let note = foodNotes.get().find((n) => n.date === date);
+    let reduced: FoodModel[] = [];
     if (note) {
         note.foodIds.forEach((foodId) => {
             const food = foods.get().find((f) => f.id === foodId);
@@ -83,9 +107,25 @@ const updateNotedFoods = (date: string) => {
                 notes.push(food);
             }
         });
+
+        reduced = notes.reduce((acc, food) => {
+            const foodIndex = acc.findIndex((el) => el.id === food.id);
+            const foodExists = foodIndex > -1;
+            if (foodExists) {
+                const existingFood = acc[foodIndex];
+                acc[foodIndex] = {
+                    ...existingFood,
+                    prot: existingFood.prot + food.prot,
+                    kcal: existingFood.kcal + food.kcal,
+                    amount: existingFood.amount + food.amount,
+                };
+                return acc;
+            }
+            return [...acc, food];
+        }, [] as FoodModel[]);
     }
 
-    notedFoods.set(notes);
+    notedFoods.set(reduced);
 }
 
 selectedDate.listen((newDate) => {

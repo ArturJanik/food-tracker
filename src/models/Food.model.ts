@@ -1,5 +1,5 @@
 export interface FoodModel {
-    id: number;
+    id: string;
     name: string;
     unit: string;
     amount: number;

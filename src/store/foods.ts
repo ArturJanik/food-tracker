@@ -1,7 +1,5 @@
 import { action, atom } from 'nanostores';
 import { FoodModel } from '../models/Food.model';
-import { FoodNoteModel } from '../models/FoodNote.model';
-import { selectedDate } from './settings';
 
 interface CreateFoodActionPayload {
     name: string;
@@ -11,33 +9,46 @@ interface CreateFoodActionPayload {
     amount: number;
 }
 
-const initialState: FoodModel[] = [
-    { id: 1, name: 'Valio', kcal: 140, prot: 20, unit: 'szt', amount: 1 },
-    { id: 2, name: 'Chleb pszenny', kcal: 26, prot: 1, unit: 'g', amount: 10 },
-    { id: 3, name: 'Ser edam rycki', kcal: 35, prot: 2.6, unit: 'g', amount: 10 },
-    { id: 4, name: 'Kawa z mlekiem', kcal: 90, prot: 5, unit: 'szt', amount: 1 },
-    { id: 5, name: 'Białko', kcal: 130, prot: 26, unit: 'szt', amount: 1 },
-    { id: 6, name: 'Fruvita', kcal: 170, prot: 18, unit: 'szt', amount: 1 },
-    { id: 7, name: 'Mus jabłko', kcal: 100, prot: 0, unit: 'szt', amount: 1 },
-];
+interface GetFoodsResponse {
+    foods: FoodModel[];
+}
 
-export const foods = atom<FoodModel[]>(initialState);
-export const lastFoodId = atom<number>(7);
+const API_URL = 'https://api.codeplayground.usermd.net/api';
+
+export const foods = atom<FoodModel[]>([]);
+export const foodsLoading = atom(false);
+
+export const getFoods = action(foods, 'Get All Foods', (store) => {
+    foodsLoading.set(true);
+    fetch(`${API_URL}/food/all`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then<GetFoodsResponse>((res) => res.json())
+    .then((res) => {
+        if ('error' in res) {
+            console.log('error:', res);
+            foodsLoading.set(false);
+        } else {
+            const { foods } = res;
+            store.set(foods);
+            foodsLoading.set(false);
+        }
+    });
+});
 
 export const createFood = action(foods, 'Create Food', (store, data: CreateFoodActionPayload) => {
     const { name, kcal, prot, unit, amount } = data;
-    console.log(data)
-
-    const newId = lastFoodId.get() + 1;
-    const food = {
-        id: newId,
-        name,
-        kcal,
-        prot,
-        unit,
-        amount,
-    };
-
-    store.set([...store.get(), food]);
-    lastFoodId.set(newId);
+    
+    fetch(`${API_URL}/food`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, kcal, prot, unit, amount }),
+    })
+    .then((res) => res.json())
+    .then((food: FoodModel) => store.set([...store.get(), food]))
+    .catch((err) => console.log(err));
 });

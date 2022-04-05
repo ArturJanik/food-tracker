@@ -15,7 +15,7 @@ interface FoodListProps {
 const FoodList: FunctionalComponent<FoodListProps> = ({ foods }) => {
     const date = useStore(selectedDate);
 
-    const addToFoodnotes = (foodId: number) => {
+    const addToFoodnotes = (foodId: string) => {
         addNote({ date, foodId });
     }
 

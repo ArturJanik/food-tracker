@@ -1,5 +1,5 @@
 export interface FoodNoteModel {
-    id: number;
+    id: string;
     date: string;
-    foodIds: number[];
+    foodIds: string[];
 }

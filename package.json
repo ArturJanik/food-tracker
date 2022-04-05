@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "lazy-foodnote",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "build": "preact build",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.5",
-    "@types/jest": "^26.0.8",
+    "@types/jest": "^27.2.5",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "enzyme": "^3.11.0",
