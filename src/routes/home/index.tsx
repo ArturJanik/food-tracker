@@ -13,7 +13,7 @@ import style from './style.css';
 const REQUIRED_PIN = '0700';
 
 const Home: FunctionalComponent = () => {
-    const data = useStore(foods);
+    const foodsList = useStore(foods);
     const loading = useStore(foodsLoading);
     const notesLoading = useStore(foodnotesLoading);
     const [authorized, setAuthorized] = useState(false);
@@ -26,8 +26,10 @@ const Home: FunctionalComponent = () => {
     }, [authorized]);
 
     useEffect(() => {
-        getFoodnotes();
-    }, [data]);
+        if (foodsList.length > 0){
+            getFoodnotes();
+        }
+    }, [foodsList]);
 
     const validate = () => {
         if (pin === REQUIRED_PIN) {
@@ -55,7 +57,7 @@ const Home: FunctionalComponent = () => {
         <div class={style.home}>
             { !notesLoading && <Summary /> }
             { loading && <Spinner /> }
-            { !loading && <FoodList foods={data} /> }
+            { !loading && <FoodList foods={foodsList} /> }
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import { useStore } from '@nanostores/preact';
 import { FunctionalComponent, h } from 'preact';
+import { getFoods } from '../../store/foods';
 import { resetSidebar, runSidebar, sidebar } from '../../store/sidebar';
 import Settings from '../Settings';
 import Button from '../UI/Button';
@@ -17,10 +18,15 @@ const Header: FunctionalComponent = () => {
         }
     }
 
+    const refreshNotes = () => {
+        getFoods();
+    }
+
     return (
         <header class={style.header}>
             <h1>LazyFoodnote</h1>
-            <Button onClick={toggleSettings}><Icon type='gears-solid' classes={style.icon} /></Button>
+            <Button onClick={toggleSettings}><Icon type='gears-solid' /></Button>
+            <Button onClick={refreshNotes}><Icon type='repeat-solid' /></Button>
         </header>
     );
 };

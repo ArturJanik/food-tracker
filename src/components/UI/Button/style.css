@@ -14,8 +14,15 @@
     width: auto;
     white-space: nowrap;
 }
+
 .button:active:hover {
     background: #3d4da9;
+}
+
+@media all and (min-width: 1080px){
+    .button:hover {
+        background: #3d4da9;
+    }
 }
 
 .secondaryButton {
@@ -25,6 +32,7 @@
     font-weight: 700;
     padding: 4px 8px;
 }
+
 .secondaryButton:active:hover {
     background: #fff;
     box-shadow: 0 0 4px rgb(0 0 0 / 25%);
@@ -40,6 +48,7 @@
     font-weight: 700;
     text-decoration: underline;
 }
+
 .linkButton:active:hover {
     text-decoration: none;
 }
