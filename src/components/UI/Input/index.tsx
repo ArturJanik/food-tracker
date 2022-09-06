@@ -8,6 +8,7 @@ interface GeneralInputProps<T extends HTMLElement> {
     classes?: string;
     placeholder?: string;
     onInput: (e: h.JSX.TargetedEvent<T, Event>) => void;
+    onKeyDown?: (e: h.JSX.TargetedEvent<T, KeyboardEvent>) => void;
 }
 
 type InputProps =
@@ -42,7 +43,7 @@ const Input: FunctionalComponent<InputProps> = (props) => {
 
     switch (type) {
         case 'number': {
-            const { step, max, min, onInput } = props;
+            const { step, max, min, onInput, onKeyDown } = props;
             return (
                 <input
                     class={className}
@@ -56,11 +57,12 @@ const Input: FunctionalComponent<InputProps> = (props) => {
                     min={min}
                     required={required}
                     onInput={onInput}
+                    onKeyDown={onKeyDown}
                 />
             );
         }
         case 'textarea': {
-            const { maxLength, minLength, onInput } = props;
+            const { maxLength, minLength, onInput, onKeyDown } = props;
             return (
                 <textarea
                     class={className}
@@ -73,13 +75,14 @@ const Input: FunctionalComponent<InputProps> = (props) => {
                     minLength={minLength}
                     required={required}
                     onInput={onInput}
+                    onKeyDown={onKeyDown}
                 />
             );
         }
         case 'text':
         case 'password':
         case 'email': {
-            const { pattern, maxLength, minLength, onInput } = props;
+            const { pattern, maxLength, minLength, onInput, onKeyDown } = props;
             return (
                 <input
                     class={className}
@@ -93,11 +96,12 @@ const Input: FunctionalComponent<InputProps> = (props) => {
                     minLength={minLength}
                     required={required}
                     onInput={onInput}
+                    onKeyDown={onKeyDown}
                 />
             );
         }
         case 'date': {
-            const { onInput } = props;
+            const { onInput, onKeyDown } = props;
             return (
                 <input
                     class={className}
@@ -108,6 +112,7 @@ const Input: FunctionalComponent<InputProps> = (props) => {
                     value={value}
                     required={required}
                     onInput={onInput}
+                    onKeyDown={onKeyDown}
                 />
             );
         }

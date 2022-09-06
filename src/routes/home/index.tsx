@@ -35,20 +35,30 @@ const Home: FunctionalComponent = () => {
         if (pin === REQUIRED_PIN) {
             setAuthorized(true);
         }
+    };
+
+    const validateOnKeyPress = (e: h.JSX.TargetedEvent<HTMLInputElement, KeyboardEvent>) => {
+        if (e.code === 'Enter') {
+            validate();
+        }
     }
 
     if (!authorized) {
         return (
             <div class={style.home}>
-                <Input
-                    type='text'
-                    id='pin'
-                    name='pin' 
-                    onInput={(e) => setPin(e.currentTarget.value)}
-                    placeholder='Enter pin'
-                    value={pin}
-                />
-                <Button classes={style.btn} onClick={validate}>Submit</Button>
+                <div class={style.pinForm}>
+                    <Input
+                        type='text'
+                        id='pin'
+                        name='pin'
+                        classes={style.input}
+                        onInput={(e) => setPin(e.currentTarget.value)}
+                        placeholder='Enter pin'
+                        value={pin}
+                        onKeyDown={validateOnKeyPress}
+                    />
+                    <Button classes={style.btn} onClick={validate}>Submit</Button>
+                </div>
             </div>
         );
     }

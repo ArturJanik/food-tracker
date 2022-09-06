@@ -7,11 +7,13 @@
         padding: 20px;
     }
 }
+
 @media only screen and (min-width: 1024px) {
     .section {
         padding: 40px;
     }
 }
+
 @media only screen and (min-width: 1500px) {
     .section {
         padding: 80px;

@@ -4,3 +4,30 @@
     margin: 0 auto;
     max-width: 1280px;
 }
+
+.pinForm {
+    margin: 0 auto;
+    max-width: 480px;
+}
+
+.input {
+    margin-bottom: 4px;
+}
+
+.btn {
+    width: 100%;
+}
+
+@media only screen and (min-width: 560px) {
+    .btn {
+        height: 40px;
+        line-height: 24px;
+        padding: 8px 16px;
+        width: auto;
+    }
+
+    .pinForm {
+        display: flex;
+        flex-direction: row;
+    }
+}
