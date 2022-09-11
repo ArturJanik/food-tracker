@@ -3,7 +3,13 @@
     box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
     cursor: pointer;
     flex: 0 0 50%;
-    padding: 24px;
+    padding: 12px;
+}
+
+@media screen and (min-width: 410px) {
+    .item {
+        padding: 24px;
+    }
 }
 
 .item:active:hover {

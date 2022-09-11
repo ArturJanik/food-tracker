@@ -43,48 +43,48 @@ const NewFoodForm: FunctionalComponent = () => {
         <>
             <div class={style.title}>Create new food</div>
             <Input
-                type='text'
-                id='foodName'
-                name='foodName' 
+                type="text"
+                id="foodName"
+                name="foodName" 
                 onInput={(e) => setName(e.currentTarget.value)}
-                placeholder='Food name'
+                placeholder="Food name"
                 value={name}
                 classes={style.field}
             />
             <div class={style.row}>
                 <Input
-                    type='number'
-                    id='foodAmount'
-                    name='foodAmount' 
+                    type="number"
+                    id="foodAmount"
+                    name="foodAmount" 
                     onInput={(e) => setAmount(parseInt(e.currentTarget.value))}
-                    placeholder='Amount'
+                    placeholder="Amount"
                     value={amount}
                 />
                 <Input
-                    type='text'
-                    id='foodUnit'
-                    name='foodUnit' 
+                    type="text"
+                    id="foodUnit"
+                    name="foodUnit" 
                     onInput={(e) => setUnit(e.currentTarget.value)}
-                    placeholder='Unit'
+                    placeholder="Unit"
                     value={unit}
                 />
             </div>
             <div class={style.row}>
                 <Input
-                    type='number'
-                    id='foodKcal'
-                    name='foodKcal' 
+                    type="number"
+                    id="foodKcal"
+                    name="foodKcal" 
                     onInput={(e) => setKcal(parseInt(e.currentTarget.value))}
-                    placeholder='kcal'
-                    value={kcal}
+                    placeholder="kcal"
+                    value={kcal === 0 ? undefined : kcal}
                 />
                 <Input
-                    type='number'
-                    id='foodProt'
-                    name='foodProt' 
+                    type="number"
+                    id="foodProt"
+                    name="foodProt" 
                     onInput={(e) => setProt(parseInt(e.currentTarget.value))}
-                    placeholder='g of protein'
-                    value={prot}
+                    placeholder="g of protein"
+                    value={prot === 0 ? undefined : prot}
                 />
             </div>
             <Button classes={style.btn} onClick={saveFood}>Save</Button>

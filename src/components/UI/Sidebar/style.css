@@ -16,6 +16,7 @@
     bottom: 0;
     display: flex;
     flex-direction: column;
+    max-height: calc(90vh - 56px);
     pointer-events: none;
     position: fixed;
     right: 0;
@@ -25,6 +26,8 @@
 }
 
 .sidebar {
+    max-height: 100%;
+    overflow: hidden;
     padding: 16px;
     pointer-events: all;
     width: 100%;

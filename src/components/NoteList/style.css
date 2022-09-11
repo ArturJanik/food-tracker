@@ -6,6 +6,11 @@
 	margin: 0;
 }
 
+.list {
+    height: 90%;
+    overflow-y: scroll;
+}
+
 .food {
     border-bottom: 1px solid #eee;
     display: grid;
