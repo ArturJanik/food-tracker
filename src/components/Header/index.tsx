@@ -25,8 +25,8 @@ const Header: FunctionalComponent = () => {
     return (
         <header class={style.header}>
             <h1>LazyFoodnote</h1>
-            <Button onClick={toggleSettings}><Icon type='gears-solid' /></Button>
-            <Button onClick={refreshNotes}><Icon type='repeat-solid' /></Button>
+            <Button onClick={toggleSettings} title="Settings"><Icon type='gears-solid' /></Button>
+            <Button onClick={refreshNotes} title="Refresh Data"><Icon type='repeat-solid' /></Button>
         </header>
     );
 };

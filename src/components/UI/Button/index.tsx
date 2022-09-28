@@ -8,9 +8,10 @@ interface ButtonProps {
     onClick?: () => void;
     classes?: string;
     type?: ButtonType;
+    title?: string;
 }
 
-const Button: FunctionalComponent<ButtonProps> = ({ children, classes, type, onClick }) => {
+const Button: FunctionalComponent<ButtonProps> = ({ children, classes, type, title, onClick }) => {
     let className = style.button;
 
     if (type === 'SECONDARY') {
@@ -26,11 +27,11 @@ const Button: FunctionalComponent<ButtonProps> = ({ children, classes, type, onC
     }
 
     if (!onClick) {
-        return <div class={className}>{children}</div>
+        return <div class={className} title={title}>{children}</div>
     }
 
     return (
-        <div class={className} onClick={onClick}>
+        <div class={className} onClick={onClick} title={title}>
             {children}
         </div>
     );

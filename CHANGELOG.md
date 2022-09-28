@@ -3,6 +3,16 @@
 * add setting to sort foods by popularity
 * add aliasing for import paths
 
+## 1.2.0 - 28.09.2022
+
+### Added
+
+* preact Testing Library configuration with jest and TS
+
+### Removed
+
+* enzyme configuration
+
 ## 1.1.0 - 11.09.2022
 
 ### Added
