@@ -18,7 +18,7 @@ const Sidebar: FunctionalComponent = () => {
     return (
         <>
             <div class={style.overlay} role="dialog" onClick={onCancel} />
-            <div class={style.sidebarWrapper} role="dialog">
+            <div class={style.sidebarWrapper}>
                 <Card classes={style.sidebar}>
                     {sidebarState.content}
                 </Card>

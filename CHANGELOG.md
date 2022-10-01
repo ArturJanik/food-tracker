@@ -8,6 +8,8 @@
 ### Added
 
 * add tests for UI components
+* add tests for Settings and Header
+* add Mock Service Worker library to simulate backend api in tests
 
 ## 1.2.0 - 28.09.2022
 

@@ -43,7 +43,7 @@ describe('UI Sidebar component', () => {
         });
 
         // when
-        await user.click(screen.getAllByRole('dialog')[0]);
+        await user.click(screen.getByRole('dialog'));
 
         // then
         await waitFor(() => {

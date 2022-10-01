@@ -12,22 +12,22 @@ const Settings: FunctionalComponent = () => {
     return (
         <>
             <div class={style.title}>Settings</div>
-            <Label forInputId='kcalInput'>Daily kcal goal</Label>
+            <Label forInputId="kcalInput">Daily kcal goal</Label>
             <Input
-                type='number'
-                id='kcalInput'
-                name='kcalInput'
+                type="number"
+                id="kcalInput"
+                name="kcalInput"
                 onInput={(e) => setKcalGoal({ goal: parseInt(e.currentTarget.value) })}
-                placeholder='Set daily kcal goal'
+                placeholder="Set daily kcal goal"
                 value={kcal}
             />
-            <Label forInputId='protInput'>Daily prot goal</Label>
+            <Label forInputId="protInput">Daily prot goal</Label>
             <Input
-                type='number'
-                id='protInput'
-                name='protInput'
+                type="number"
+                id="protInput"
+                name="protInput"
                 onInput={(e) => setProtGoal({ goal: parseInt(e.currentTarget.value) })}
-                placeholder='Set daily prot goal'
+                placeholder="Set daily prot goal"
                 value={prot}
             />
         </>
