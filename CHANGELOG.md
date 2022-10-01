@@ -3,6 +3,12 @@
 * add setting to sort foods by popularity
 * add aliasing for import paths
 
+## 1.3.0 - 01.10.2022
+
+### Added
+
+* add tests for UI components
+
 ## 1.2.0 - 28.09.2022
 
 ### Added

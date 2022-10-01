@@ -8,7 +8,7 @@ interface LabelProps {
 }
 
 const Label: FunctionalComponent<LabelProps> = ({ children, classes, forInputId }) => {
-    const className = classes ? [style.label, classes].join(' ') : style.label;
+    const className = classes ? [style.label, classes].join(' ').trim() : style.label;
 
     return (
         <label for={forInputId} class={className}>{children}</label>

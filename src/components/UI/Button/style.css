@@ -24,31 +24,3 @@
         background: #3d4da9;
     }
 }
-
-.secondaryButton {
-    composes: button;
-    background: #fff;
-    color: #666;
-    font-weight: 700;
-    padding: 4px 8px;
-}
-
-.secondaryButton:active:hover {
-    background: #fff;
-    box-shadow: 0 0 4px rgb(0 0 0 / 25%);
-    color: #000;
-}
-
-.linkButton {
-    color: #263276;
-    cursor: pointer;
-    display: inline-block;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: underline;
-}
-
-.linkButton:active:hover {
-    text-decoration: none;
-}

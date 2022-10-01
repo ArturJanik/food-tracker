@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 const Card: FunctionalComponent<CardProps> = ({ children, classes }) => {
-    const className = classes ? [style.card, classes].join(' ') : style.card;
+    const className = classes ? [style.card, classes].join(' ').trim() : style.card;
 
     return (
         <div class={className}>{children}</div>

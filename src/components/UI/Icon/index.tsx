@@ -9,16 +9,17 @@ interface IconProps {
     classes?: string;
 }
 
-const Icon: FunctionalComponent<IconProps> = ({ type, alt, classes }) => {
+const Icon: FunctionalComponent<IconProps> = ({ type, alt = type, classes }) => {
     let className = style.icon;
 
     if (classes) {
-        className = [className, classes].join(' ');
+        className = [className, classes].join(' ').trim();
     }
 
     const imagePath = `/assets/componentIcons/${type}.svg`;
+
     return (
-        <img src={imagePath} alt={alt ? alt : type} class={className} />
+        <img src={imagePath} alt={alt} class={className} />
     );
 }
 

@@ -1,44 +1,33 @@
 import { ComponentChildren, FunctionalComponent, h } from 'preact';
 import style from './style.css';
 
-type ButtonType = 'PRIMARY' | 'SECONDARY' | 'LINK';
-
 interface ButtonProps {
     children: ComponentChildren;
-    onClick?: () => void;
     classes?: string;
-    type?: ButtonType;
     title?: string;
+    onClick: () => void;
 }
 
-const Button: FunctionalComponent<ButtonProps> = ({ children, classes, type, title, onClick }) => {
+const Button: FunctionalComponent<ButtonProps> = ({
+    children,
+    classes = [],
+    title,
+    onClick,
+}) => {
     let className = style.button;
 
-    if (type === 'SECONDARY') {
-        className = style.secondaryButton;
-    }
-
-    if (type === 'LINK') {
-        className = style.linkButton;
-    }
-
-    if (classes) {
-        className = [className, classes].join(' ');
-    }
-
-    if (!onClick) {
-        return <div class={className} title={title}>{children}</div>
-    }
+    const defaultProps = {
+        class: [className, classes].join(' ').trim(),
+        title,
+        role: 'button',
+        tabIndex: 0,
+    };
 
     return (
-        <div class={className} onClick={onClick} title={title}>
+        <div {...defaultProps} onClick={onClick}>
             {children}
         </div>
     );
-};
-
-Button.defaultProps = {
-    children: 'Submit',
 };
 
 export default Button;

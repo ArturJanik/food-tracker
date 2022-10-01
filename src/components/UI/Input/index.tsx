@@ -38,8 +38,17 @@ type InputProps =
     } & GeneralInputProps<HTMLTextAreaElement>;
 
 const Input: FunctionalComponent<InputProps> = (props) => {
-    const { type, classes, id, name, placeholder, value, required } = props;
-    const className = classes ? [style.input, classes].join(' ') : style.input;
+    const {
+        type,
+        classes,
+        id,
+        name,
+        placeholder = 'enter text',
+        value,
+        required,
+    } = props;
+
+    const className = classes ? [style.input, classes].join(' ').trim() : style.input;
 
     switch (type) {
         case 'number': {
@@ -47,7 +56,7 @@ const Input: FunctionalComponent<InputProps> = (props) => {
             return (
                 <input
                     class={className}
-                    type={type}
+                    type="number"
                     placeholder={placeholder}
                     id={id}
                     name={name}
@@ -66,7 +75,6 @@ const Input: FunctionalComponent<InputProps> = (props) => {
             return (
                 <textarea
                     class={className}
-                    type={type}
                     placeholder={placeholder}
                     id={id}
                     name={name}
@@ -105,7 +113,7 @@ const Input: FunctionalComponent<InputProps> = (props) => {
             return (
                 <input
                     class={className}
-                    type={type}
+                    type="date"
                     placeholder={placeholder}
                     id={id}
                     name={name}
@@ -119,10 +127,6 @@ const Input: FunctionalComponent<InputProps> = (props) => {
         default:
             return null;
     }
-};
-
-Input.defaultProps = {
-    placeholder: 'enter text',
 };
 
 export default Input;

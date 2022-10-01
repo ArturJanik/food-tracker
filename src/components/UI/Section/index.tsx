@@ -7,18 +7,18 @@ interface SectionProps {
     classes?: string;
 }
 
-const Section: FunctionalComponent<SectionProps> = ({ children, backgroundColor, classes }) => {
-    const className = classes ? [style.section, classes].join(' ') : style.section;
+const Section: FunctionalComponent<SectionProps> = ({
+    children,
+    backgroundColor = '#fff',
+    classes,
+}) => {
+    const className = classes ? [style.section, classes].join(' ').trim() : style.section;
 
     return (
         <section class={className} style={{ background: backgroundColor }}>
             {children}
         </section>
     );
-};
-
-Section.defaultProps = {
-    backgroundColor: '#fff',
 };
 
 export default Section;

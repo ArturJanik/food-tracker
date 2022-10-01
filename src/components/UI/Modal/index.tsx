@@ -26,7 +26,7 @@ const Modal: FunctionalComponent = () => {
 
     return (
         <>
-            <div class={style.overlay} onClick={onCancel} />
+            <div class={style.overlay} onClick={onCancel} role="dialog" />
             <div class={style.modalPosition}>
                 <Card classes={style.modal}>
                     <div class={style.content}>{modalState.text}</div>
