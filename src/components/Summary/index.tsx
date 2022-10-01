@@ -29,7 +29,6 @@ const Summary: FunctionalComponent = () => {
         }
         setKcalBarWidth(kBarWidth);
         setProtBarWidth(pBarWidth);
-
     }, [kcal, prot]);
     
     const toggleNotesList = () => {
