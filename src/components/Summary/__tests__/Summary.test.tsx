@@ -1,4 +1,4 @@
-import { h, Fragment} from 'preact';
+import { h, Fragment } from 'preact';
 import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor } from '@testing-library/preact';
 import Summary from '..';

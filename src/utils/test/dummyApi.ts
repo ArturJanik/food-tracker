@@ -15,15 +15,21 @@ const dummyFood: FoodModel = {
 const dummyFoodNote: FoodNoteModel = {
     id: '6248c1234a567be5b1c4b3d8',
     date: '2.04.2022',
-    foodIds: ['abcdef1234'],
+    foodIds: ['abcdef1234', 'abcdef1236'],
 };
 
 const getDummyServer = () => setupServer(
     rest.get('https://api.codeplayground.usermd.net/api/food/all', (req, res, ctx) => {
-      return res(ctx.json({foods: [dummyFood]}))
+      return res(ctx.json({foods: [dummyFood]}));
     }),
     rest.get('https://api.codeplayground.usermd.net/api/foodnote/all', (req, res, ctx) => {
-        return res(ctx.json({foodnotes: [dummyFoodNote]}))
+        return res(ctx.json({foodnotes: [dummyFoodNote]}));
+    }),
+    rest.put('https://api.codeplayground.usermd.net/api/foodnote/remove-food', (req, res, ctx) => {
+        return res(ctx.json({
+            ...dummyFoodNote,
+            foodIds: ['abcdef1234'],
+        }));
     }),
 );
 

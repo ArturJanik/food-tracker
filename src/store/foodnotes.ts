@@ -60,7 +60,7 @@ export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId 
 
 export const removeNote = action(foodNotes, 'Remove Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
     const stringDate = date.toLocaleDateString();
-    
+
     fetch(`${API_URL}/foodnote/remove-food`, {
         method: 'PUT',
         headers: {

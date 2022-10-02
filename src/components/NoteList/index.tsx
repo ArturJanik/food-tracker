@@ -1,7 +1,6 @@
 import { useStore } from '@nanostores/preact';
 import { FunctionalComponent, h, Fragment } from 'preact';
-import { foodnotesLoading, notedFoods } from '../../store/foodnotes';
-import { removeNote } from '../../store/foodnotes';
+import { foodnotesLoading, notedFoods, removeNote } from '../../store/foodnotes';
 import { selectedDate } from '../../store/settings';
 import Spinner from '../UI/Spinner';
 import style from './style.css';
@@ -13,7 +12,7 @@ const NoteList: FunctionalComponent = () => {
 
     const deleteFoodnode = (foodId: string) => {
         removeNote({ date, foodId });
-    }
+    };
 
     if (loading) {
         return <Spinner />;
@@ -27,7 +26,7 @@ const NoteList: FunctionalComponent = () => {
                     <div class={style.name}>{food.name} ({Math.floor(food.amount)}{food.unit})</div>
                     <div class={style.kcal}>{Math.floor(food.kcal)}kcal</div>
                     <div class={style.prot}>{Math.floor(food.prot)}g</div>
-                    <div onClick={() => deleteFoodnode(food.id)} class={style.btn}>remove</div>
+                    <div onClick={() => deleteFoodnode(food.id)} class={style.btn} role="button">remove</div>
                 </div>)}
             </div>
         </>
