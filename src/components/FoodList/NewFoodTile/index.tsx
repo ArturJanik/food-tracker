@@ -2,10 +2,10 @@ import { useStore } from '@nanostores/preact';
 import { FunctionalComponent, h } from 'preact';
 import { resetSidebar, runSidebar, sidebar } from '../../../store/sidebar';
 import Button from '../../UI/Button';
-import NewFoodForm from '../NewFoodForm';
+import { NewFoodForm } from '../NewFoodForm';
 import style from './style.css';
 
-const NewFoodTile: FunctionalComponent = () => {
+export const NewFoodTile: FunctionalComponent = () => {
     const { type } = useStore(sidebar);
     
     const toggleNewFoodForm = () => {
@@ -22,5 +22,3 @@ const NewFoodTile: FunctionalComponent = () => {
         </div>
     );
 };
-
-export default NewFoodTile;

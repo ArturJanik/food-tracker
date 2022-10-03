@@ -1,7 +1,7 @@
 import { useStore } from '@nanostores/preact';
 import { FunctionalComponent, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import FoodList from '../../components/FoodList';
+import { FoodList } from '../../components/FoodList';
 import Summary from '../../components/Summary';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';

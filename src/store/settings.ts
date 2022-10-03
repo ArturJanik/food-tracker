@@ -24,3 +24,9 @@ export const setPrevDay = action(selectedDate, 'Set Prev Day', (store) => {
     const newDate = store.get().setDate(store.get().getDate() - 1);
     store.set(new Date(newDate));
 });
+
+export const resetStore = () => {
+    selectedDate.set(new Date(Date.now()));
+    kcalGoal.set(1600);
+    protGoal.set(140);
+};

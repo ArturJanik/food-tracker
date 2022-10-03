@@ -21,3 +21,7 @@
 .btn {
     margin-top: 8px;
 }
+
+.errorMsg {
+    color: rgb(134, 0, 0);
+}

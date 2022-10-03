@@ -7,24 +7,28 @@ import Button from '../../UI/Button';
 import Input from '../../UI/Input';
 import style from './style.css';
 
-const NewFoodForm: FunctionalComponent = () => {
+export const NewFoodForm: FunctionalComponent = () => {
     const [name, setName] = useState('');
     const [amount, setAmount] = useState(0);
     const [unit, setUnit] = useState('');
     const [kcal, setKcal] = useState(0);
     const [prot, setProt] = useState(0);
+    const [error, setError] = useState(false);
 
     const validateForm = (): boolean => {
         if (name?.length <= 0) {
             return false;
         }
-        if (amount <= 0) {
+        if (isNaN(amount) || amount <= 0) {
             return false;
         }
         if (unit?.length <= 0) {
             return false;
         }
-        if (kcal <= 0) {
+        if (isNaN(kcal) || kcal <= 0) {
+            return false;
+        }
+        if (isNaN(prot)) {
             return false;
         }
         return true;
@@ -33,9 +37,12 @@ const NewFoodForm: FunctionalComponent = () => {
     const saveFood = () => {
         const valid = validateForm();
         if (valid) {
+            setError(false);
             const newFood: FoodDraft = { name, amount, unit, kcal, prot };
             createFood(newFood);
             resetSidebar();
+        } else {
+            setError(true);
         }
     }
 
@@ -56,7 +63,7 @@ const NewFoodForm: FunctionalComponent = () => {
                     type="number"
                     id="foodAmount"
                     name="foodAmount" 
-                    onInput={(e) => setAmount(parseInt(e.currentTarget.value))}
+                    onInput={(e) => setAmount(parseFloat((e.currentTarget.value).replace(',','.')))}
                     placeholder="Amount"
                     value={amount}
                 />
@@ -82,14 +89,13 @@ const NewFoodForm: FunctionalComponent = () => {
                     type="number"
                     id="foodProt"
                     name="foodProt" 
-                    onInput={(e) => setProt(parseInt(e.currentTarget.value))}
+                    onInput={(e) => setProt(parseFloat((e.currentTarget.value).replace(',','.')))}
                     placeholder="g of protein"
                     value={prot === 0 ? undefined : prot}
                 />
             </div>
+            { error && <div class={style.errorMsg}>One or more fields is invalid</div>}
             <Button classes={style.btn} onClick={saveFood}>Save</Button>
         </>
     );
 };
-
-export default NewFoodForm;

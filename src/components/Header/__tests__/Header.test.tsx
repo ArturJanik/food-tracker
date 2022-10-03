@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor } from '@testing-library/preact';
 import Header from '..';
 import Sidebar from '../../UI/Sidebar';
-import FoodList from '../../FoodList';
+import { FoodList } from '../../FoodList';
 import { foods } from '../../../store/foods';
 import { getDummyServer } from '../../../utils/test/dummyApi';
 
@@ -81,14 +81,14 @@ describe('Header', () => {
         const refreshBtn = screen.getByTitle('Refresh Data');
 
         // then
-        expect(screen.queryByText(/Potato/)).toBeNull();
+        expect(screen.queryByText(/Potato/i)).toBeNull();
 
         // when
         await user.click(refreshBtn);
 
         // then
         await waitFor(() => {
-            const foodItem = screen.getByText(/Potato/);
+            const foodItem = screen.getByText(/Potato/i);
             expect(foodItem).toBeVisible();
         });
     });

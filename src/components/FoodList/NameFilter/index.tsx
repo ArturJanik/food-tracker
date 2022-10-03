@@ -20,7 +20,7 @@ export const NameFilter: FunctionalComponent<NameFilterProps> = ({
                 name="nameQuery"
                 classes={style.input}
                 onInput={(e) => onInput(e.currentTarget.value)}
-                placeholder=""
+                placeholder="enter food name"
                 value={searchQuery}
             />
         </div>

@@ -7,10 +7,10 @@ interface FoodProps {
     onClick: (id: string) => void;
 }
 
-const Food: FunctionalComponent<FoodProps> = ({ data, onClick }) => {
+export const Food: FunctionalComponent<FoodProps> = ({ data, onClick }) => {
     const { id, name, kcal, amount, unit, prot } = data;
     return (
-        <div class={style.item} onClick={() => onClick(id)}>
+        <div class={style.item} onClick={() => onClick(id)} tabIndex={0} aria-label={`${amount}${unit} of ${name}`}>
             <div class={style.name}>{name} (<span class={style.amount}>{amount}{unit}</span>)</div>
             <div class={style.data}>
                 <div class={style.kcal}>{kcal}kcal</div>
@@ -19,5 +19,3 @@ const Food: FunctionalComponent<FoodProps> = ({ data, onClick }) => {
         </div>
     );
 };
-
-export default Food;

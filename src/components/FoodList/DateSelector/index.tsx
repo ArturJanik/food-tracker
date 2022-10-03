@@ -3,7 +3,7 @@ import { FunctionalComponent, h } from 'preact';
 import { selectedDate, setNextDay, setPrevDay } from '../../../store/settings';
 import style from './style.css';
 
-const DateSelector: FunctionalComponent = () => {
+export const DateSelector: FunctionalComponent = () => {
     const date = useStore(selectedDate);
 
     const selectNextDay = () => {
@@ -16,11 +16,9 @@ const DateSelector: FunctionalComponent = () => {
 
     return (
         <div class={style.dateSelector}>
-            <div class={style.btn} onClick={selectPrevDay}>&laquo;</div>
-            <div class={style.date}>{date.toLocaleDateString()}</div>
-            <div class={style.btn} onClick={selectNextDay}>&raquo;</div>
+            <div class={style.btn} onClick={selectPrevDay} role="button" aria-label="previous day">&laquo;</div>
+            <div class={style.date} aria-label="selected date">{date.toLocaleDateString()}</div>
+            <div class={style.btn} onClick={selectNextDay} role="button" aria-label="next day">&raquo;</div>
         </div>
     );
 };
-
-export default DateSelector;
