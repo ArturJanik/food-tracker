@@ -10,7 +10,7 @@ describe('UI Modal component', () => {
         const user = userEvent.setup();
         render(
             <>
-                <div onClick={() => runModal('Modal text', () => {})}>Open modal</div>
+                <div onClick={() => runModal('Modal text', jest.fn())}>Open modal</div>
                 <Modal />
             </>
         );
@@ -29,7 +29,7 @@ describe('UI Modal component', () => {
         const user = userEvent.setup();
         render(
             <>
-                <div onClick={() => runModal('Modal text', () => {})}>Open modal</div>
+                <div onClick={() => runModal('Modal text', jest.fn())}>Open modal</div>
                 <Modal />
             </>
         );
@@ -56,7 +56,7 @@ describe('UI Modal component', () => {
         const user = userEvent.setup();
         render(
             <>
-                <div onClick={() => runModal('Modal text', () => {})}>Open modal</div>
+                <div onClick={() => runModal('Modal text', jest.fn())}>Open modal</div>
                 <Modal />
             </>
         );
@@ -83,7 +83,7 @@ describe('UI Modal component', () => {
         const user = userEvent.setup();
         render(
             <>
-                <div onClick={() => runModal('Modal text', () => {})}>Open modal</div>
+                <div onClick={() => runModal('Modal text', jest.fn())}>Open modal</div>
                 <Modal />
             </>
         );

@@ -22,7 +22,7 @@ const NoteList: FunctionalComponent = () => {
         <>
             <div class={style.title}>{date.toLocaleDateString()} foods</div>
             <div class={style.list}>
-                {foods.map((food) => <div class={style.food}>
+                {foods.map((food) => <div class={style.food} key={food.id}>
                     <div class={style.name}>{food.name} ({Math.floor(food.amount)}{food.unit})</div>
                     <div class={style.kcal}>{Math.floor(food.kcal)}kcal</div>
                     <div class={style.prot}>{Math.floor(food.prot)}g</div>

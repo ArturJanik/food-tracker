@@ -17,7 +17,7 @@ describe('UI Input component', () => {
                 type={type as any}
                 id=""
                 name=""
-                onInput={() => {}}
+                onInput={jest.fn()}
                 placeholder={placeholder}
             />
         );
@@ -36,7 +36,7 @@ describe('UI Input component', () => {
                     pattern="[A-Za-z]{3}"
                     id=""
                     name=""
-                    onInput={() => {}}
+                    onInput={jest.fn()}
                 />
             );
             const field = screen.getByRole('textbox');
@@ -71,7 +71,7 @@ describe('UI Input component', () => {
                     type="text"
                     id=""
                     name=""
-                    onInput={() => {}}
+                    onInput={jest.fn()}
                     required
                 />
             );
@@ -176,7 +176,7 @@ describe('UI Input component', () => {
                     type="email"
                     id=""
                     name=""
-                    onInput={() => {}}
+                    onInput={jest.fn()}
                 />
             );
             const field: HTMLInputElement = screen.getByRole('textbox');
@@ -293,7 +293,7 @@ describe('UI Input component', () => {
                     type="date"
                     id=""
                     name=""
-                    onInput={() => {}}
+                    onInput={jest.fn()}
                     required
                     placeholder="Enter date"
                 />
@@ -354,7 +354,7 @@ describe('UI Input component', () => {
                     type="textarea"
                     id=""
                     name=""
-                    onInput={() => {}}
+                    onInput={jest.fn()}
                     required
                 />
             );
@@ -415,7 +415,7 @@ describe('UI Input component', () => {
                     type="number"
                     id=""
                     name=""
-                    onInput={() => {}}
+                    onInput={jest.fn()}
                     required
                     placeholder="Enter number"
                 />
@@ -449,7 +449,7 @@ describe('UI Input component', () => {
                     type="number"
                     id=""
                     name=""
-                    onInput={() => {}}
+                    onInput={jest.fn()}
                     min={2}
                     max={3}
                     placeholder="Enter number"

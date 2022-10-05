@@ -18,7 +18,7 @@ describe('Food', () => {
 
         // when
         render(
-            <Food data={data} onClick={() => {}} />
+            <Food data={data} onClick={jest.fn()} />
         );
 
         // then
@@ -45,6 +45,6 @@ describe('Food', () => {
         await user.click(screen.getByLabelText('100g of Potato'));
 
         // then
-        expect(onFoodClickCallback).toBeCalledTimes(1);
+        expect(onFoodClickCallback).toHaveBeenCalledTimes(1);
     });
 });

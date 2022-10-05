@@ -92,7 +92,7 @@ describe('FoodList', () => {
 
     it('should add food note when user clicks on food item', async () => {
         // given
-        const foodnotesStoreMock = require('../../../store/foodnotes');
+        const foodnotesStoreMock = await import('../../../store/foodnotes');
         const user = userEvent.setup();
         const foods: FoodModel[] = [...dummyData];
         render(<FoodList foods={foods} />);
@@ -103,7 +103,7 @@ describe('FoodList', () => {
         
         // then
         await waitFor(() => {
-            expect(foodnotesStoreMock.addNote).toBeCalledTimes(1);
+            expect(foodnotesStoreMock.addNote).toHaveBeenCalledTimes(1);
         });
     });
 });

@@ -29,7 +29,7 @@ const Summary: FunctionalComponent = () => {
         }
         setKcalBarWidth(kBarWidth);
         setProtBarWidth(pBarWidth);
-    }, [kcal, prot]);
+    }, [kcal, prot, targetKcal, targetProt]);
     
     const toggleNotesList = () => {
         if (type === 'INACTIVE') {
@@ -44,12 +44,12 @@ const Summary: FunctionalComponent = () => {
     return (
         <div class={style.summary}>
             <div class={style.barContainer}>
-                <div class={kcalBarClass} style={{ width: kcalBarWidth + '%' }}></div>
+                <div class={kcalBarClass} style={{ width: `${kcalBarWidth}%` }} />
                 <div class={style.text}>Kcal: {Math.floor(kcal)}/{targetKcal}kcal</div>
             </div>
             <div class={style.flexWrapper}>
                 <div class={style.barContainer}>
-                    <div class={style.bar} style={{ width: protBarWidth + '%' }}></div>
+                    <div class={style.bar} style={{ width: `${protBarWidth}%` }} />
                     <p class={style.text}>Prot: {Math.floor(prot)}/{targetProt}g</p>
                 </div>
                 <Button onClick={toggleNotesList}>All notes</Button>

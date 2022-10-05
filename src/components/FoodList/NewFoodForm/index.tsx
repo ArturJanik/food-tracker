@@ -81,7 +81,7 @@ export const NewFoodForm: FunctionalComponent = () => {
                     type="number"
                     id="foodKcal"
                     name="foodKcal" 
-                    onInput={(e) => setKcal(parseInt(e.currentTarget.value))}
+                    onInput={(e) => setKcal(parseInt(e.currentTarget.value, 10))}
                     placeholder="kcal"
                     value={kcal === 0 ? undefined : kcal}
                 />

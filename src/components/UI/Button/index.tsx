@@ -14,7 +14,7 @@ const Button: FunctionalComponent<ButtonProps> = ({
     title,
     onClick,
 }) => {
-    let className = style.button;
+    const className = style.button;
 
     const defaultProps = {
         class: [className, classes].join(' ').trim(),

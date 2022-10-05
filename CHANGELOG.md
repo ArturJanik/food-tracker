@@ -3,6 +3,12 @@
 * add setting to sort foods by popularity
 * add aliasing for import paths
 
+## 1.3.3 - 05.10.2022
+
+### Changed
+
+* linter fixes and readme
+
 ## 1.3.2 - 05.10.2022
 
 ### Added

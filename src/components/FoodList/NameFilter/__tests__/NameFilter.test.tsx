@@ -6,7 +6,7 @@ import { NameFilter } from '..';
 describe('NameFilter', () => {
     it('should display food name filter', () => {
         // when
-        render(<NameFilter searchQuery="" onInput={() => {}} />);
+        render(<NameFilter searchQuery="" onInput={jest.fn()} />);
 
         // then
         const label = screen.getByText('Filter by name:');
@@ -26,6 +26,6 @@ describe('NameFilter', () => {
         await user.keyboard('potato');
 
         // then
-        expect(onQueryInput).toBeCalledTimes(6);
+        expect(onQueryInput).toHaveBeenCalledTimes(6);
     });
 });

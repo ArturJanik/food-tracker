@@ -33,7 +33,7 @@ export const FoodList: FunctionalComponent<FoodListProps> = ({ foods }) => {
                 searchQuery={searchQuery}
             />
             <div class={style.list}>
-                {filterByName(foods, searchQuery).map((food) => <Food data={food} onClick={addToFoodnotes} />)}
+                {filterByName(foods, searchQuery).map((food) => <Food data={food} onClick={addToFoodnotes} key={food.id} />)}
                 <NewFoodTile />
             </div>
         </>

@@ -96,7 +96,7 @@ const updateTotals = (date: string) => {
 const updateNotedFoods = (date: string) => {
     const notes: FoodModel[] = [];
 
-    let note = foodNotes.get().find((n) => n.date === date);
+    const note = foodNotes.get().find((n) => n.date === date);
     let reduced: FoodModel[] = [];
     if (note) {
         note.foodIds.forEach((foodId) => {

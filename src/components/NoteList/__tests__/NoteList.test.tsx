@@ -28,7 +28,7 @@ describe('NoteList', () => {
 
     it('should remove food when remove link is clicked', async () => {
         // given
-        const foodnotesStoreMock = require('../../../store/foodnotes');
+        const foodnotesStoreMock = await import('../../../store/foodnotes');
         const user = userEvent.setup();
         render(<NoteList />);
 
@@ -37,7 +37,7 @@ describe('NoteList', () => {
 
         // then
         await waitFor(() => {
-            expect(foodnotesStoreMock.removeNote).toBeCalledTimes(1);
+            expect(foodnotesStoreMock.removeNote).toHaveBeenCalledTimes(1);
         });
     });
 });

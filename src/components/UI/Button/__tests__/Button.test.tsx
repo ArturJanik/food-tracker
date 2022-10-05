@@ -5,7 +5,7 @@ import Button from '..';
 describe('UI Button component', () => {
     it('should render button text', () => {
         // when
-        render(<Button onClick={() => {}}>Submit</Button>);
+        render(<Button onClick={jest.fn()}>Submit</Button>);
 
         // then
         expect(screen.getByRole('button')).toHaveTextContent('Submit');
