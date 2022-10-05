@@ -24,7 +24,5 @@ export function runModal(text: string, onConfirm: () => void, onCancel?: () => v
 }
 
 export function resetModal(): void {
-    if (modal.get().type === 'ACTIVE') {
-        modal.set(initialState);
-    }
+    modal.set(initialState);
 }

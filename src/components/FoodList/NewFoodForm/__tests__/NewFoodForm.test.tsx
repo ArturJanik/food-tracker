@@ -2,8 +2,15 @@ import { h } from 'preact';
 import { render, screen, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { NewFoodForm } from '..';
+import { getDummyServer } from '../../../../utils/test/dummyApi';
 
 describe('NewFoodForm', () => {
+    const server = getDummyServer();
+
+    beforeAll(() => server.listen());
+    afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
+
     it('should display new food creation form', () => {
         // when
         render(<NewFoodForm />);

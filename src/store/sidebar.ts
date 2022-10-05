@@ -22,7 +22,5 @@ export function runSidebar(content: preact.JSX.Element): void {
 }
 
 export function resetSidebar(): void {
-    if (sidebar.get().type === 'ACTIVE') {
-        sidebar.set(initialState);
-    }
+    sidebar.set(initialState);
 }

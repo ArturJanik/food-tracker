@@ -1,4 +1,5 @@
 import { action, atom } from 'nanostores';
+import { API_URL } from '../config/consts';
 import { FoodModel } from '../models/Food.model';
 
 interface CreateFoodActionPayload {
@@ -12,8 +13,6 @@ interface CreateFoodActionPayload {
 interface GetFoodsResponse {
     foods: FoodModel[];
 }
-
-const API_URL = 'https://api.codeplayground.usermd.net/api';
 
 export const foods = atom<FoodModel[]>([]);
 export const foodsLoading = atom(false);

@@ -8,9 +8,8 @@ import Input from '../../components/UI/Input';
 import Spinner from '../../components/UI/Spinner';
 import { foodnotesLoading, getFoodnotes } from '../../store/foodnotes';
 import { foods, foodsLoading, getFoods } from '../../store/foods';
+import { PIN as REQUIRED_PIN } from '../../config/consts';
 import style from './style.css';
-
-const REQUIRED_PIN = '0700';
 
 const Home: FunctionalComponent = () => {
     const foodsList = useStore(foods);

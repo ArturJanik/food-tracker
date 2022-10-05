@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import { API_URL } from '../../config/consts';
 import { FoodModel } from '../../models/Food.model';
 import { FoodNoteModel } from '../../models/FoodNote.model';
 
@@ -19,17 +20,23 @@ const dummyFoodNote: FoodNoteModel = {
 };
 
 const getDummyServer = () => setupServer(
-    rest.get('https://api.codeplayground.usermd.net/api/food/all', (req, res, ctx) => {
+    rest.get(`${API_URL}/food/all`, (req, res, ctx) => {
       return res(ctx.json({foods: [dummyFood]}));
     }),
-    rest.get('https://api.codeplayground.usermd.net/api/foodnote/all', (req, res, ctx) => {
+    rest.get(`${API_URL}/foodnote/all`, (req, res, ctx) => {
         return res(ctx.json({foodnotes: [dummyFoodNote]}));
     }),
-    rest.put('https://api.codeplayground.usermd.net/api/foodnote/remove-food', (req, res, ctx) => {
+    rest.post(`${API_URL}/foodnote`, (req, res, ctx) => {
+        return res(ctx.json({ ...dummyFoodNote }));
+    }),
+    rest.put(`${API_URL}/foodnote/remove-food`, (req, res, ctx) => {
         return res(ctx.json({
             ...dummyFoodNote,
             foodIds: ['abcdef1234'],
         }));
+    }),
+    rest.post(`${API_URL}/food`, (req, res, ctx) => {
+        return res(ctx.json({ ...dummyFood, id: 'abcdef6789', name: 'Cheese' }));
     }),
 );
 

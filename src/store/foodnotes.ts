@@ -1,9 +1,9 @@
 import { action, atom } from 'nanostores';
+import { API_URL } from '../config/consts';
 import { FoodModel } from '../models/Food.model';
 import { FoodNoteModel } from '../models/FoodNote.model';
 import { foods } from './foods';
 import { selectedDate } from './settings';
-
 
 interface GetFoodnotesResponse {
     foodnotes: FoodNoteModel[];
@@ -12,8 +12,6 @@ interface FoodnoteActionPayload {
     date: Date;
     foodId: string;
 }
-
-const API_URL = 'https://api.codeplayground.usermd.net/api';
 
 export const foodNotes = atom<FoodNoteModel[]>([]);
 export const notedFoods = atom<FoodModel[]>([]);
@@ -139,3 +137,11 @@ foodNotes.listen(() => {
     updateTotals(date);
     updateNotedFoods(date);
 });
+
+export const resetStore = () => {
+    foodNotes.set([]);
+    notedFoods.set([]);
+    foodnotesLoading.set(false);
+    totalKcal.set(0);
+    totalProt.set(0);
+};
