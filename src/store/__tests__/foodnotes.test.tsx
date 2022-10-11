@@ -9,16 +9,10 @@ import {
     addNote,
     resetStore,
 } from '../foodnotes';
-import { getDummyServer } from '../../utils/test/dummyApi';
 import { waitFor } from '@testing-library/preact';
 
 describe('foodnotes store', () => {
-    const server = getDummyServer();
-
     beforeEach(() => resetStore());
-    beforeAll(() => server.listen());
-    afterEach(() => server.resetHandlers());
-    afterAll(() => server.close());
 
     afterEach(() => {
         cleanStores(foodNotes);

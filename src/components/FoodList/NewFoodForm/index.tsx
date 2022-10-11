@@ -1,7 +1,7 @@
 import { FunctionalComponent, h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import { FoodDraft } from '../../../models/Food.model';
-import { createFood } from '../../../store/foods';
+import { createNewFood } from '../../../store/foods';
 import { resetSidebar } from '../../../store/sidebar';
 import Button from '../../UI/Button';
 import Input from '../../UI/Input';
@@ -39,7 +39,7 @@ export const NewFoodForm: FunctionalComponent = () => {
         if (valid) {
             setError(false);
             const newFood: FoodDraft = { name, amount, unit, kcal, prot };
-            createFood(newFood);
+            createNewFood(newFood);
             resetSidebar();
         } else {
             setError(true);

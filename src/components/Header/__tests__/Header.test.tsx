@@ -6,7 +6,6 @@ import Header from '..';
 import Sidebar from '../../UI/Sidebar';
 import { FoodList } from '../../FoodList';
 import { foods } from '../../../store/foods';
-import { getDummyServer } from '../../../utils/test/dummyApi';
 
 const DummyListing: FunctionalComponent = () => {
     const foodsList = useStore(foods);
@@ -20,12 +19,6 @@ const DummyListing: FunctionalComponent = () => {
 }
 
 describe('Header', () => {
-    const server = getDummyServer();
-
-    beforeAll(() => server.listen());
-    afterEach(() => server.resetHandlers());
-    afterAll(() => server.close());
-
     it('should render logo', () => {
         // when
         render(<Header />);

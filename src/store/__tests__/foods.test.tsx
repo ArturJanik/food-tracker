@@ -1,15 +1,8 @@
 import { cleanStores, keepMount } from 'nanostores'
-import { foods, foodsLoading, getFoods, createFood } from '../foods';
-import { getDummyServer } from '../../utils/test/dummyApi';
+import { foods, foodsLoading, getFoods, createNewFood } from '../foods';
 import { waitFor } from '@testing-library/preact';
 
 describe('foods store', () => {
-    const server = getDummyServer();
-
-    beforeAll(() => server.listen());
-    afterEach(() => server.resetHandlers());
-    afterAll(() => server.close());
-
     afterEach(() => {
         cleanStores(foods);
         cleanStores(foodsLoading);
@@ -48,7 +41,7 @@ describe('foods store', () => {
         keepMount(foods);
 
         // when
-        createFood({
+        createNewFood({
             name: 'Dummy',
             kcal: 100,
             prot: 100,

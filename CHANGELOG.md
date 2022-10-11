@@ -3,6 +3,10 @@
 * add setting to sort foods by popularity
 * add aliasing for import paths
 
+## 1.3.4 - 11.10.2022
+
+* extract api calls from store
+
 ## 1.3.3 - 05.10.2022
 
 ### Changed

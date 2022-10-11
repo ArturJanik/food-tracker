@@ -1,13 +1,10 @@
 import { action, atom } from 'nanostores';
-import { API_URL } from '../config/consts';
+import { addFoodnote, getAllFoodnotes, removeFoodnoteFood } from '../api/foodnotes';
 import { FoodModel } from '../models/Food.model';
 import { FoodNoteModel } from '../models/FoodNote.model';
 import { foods } from './foods';
 import { selectedDate } from './settings';
 
-interface GetFoodnotesResponse {
-    foodnotes: FoodNoteModel[];
-}
 interface FoodnoteActionPayload {
     date: Date;
     foodId: string;
@@ -21,57 +18,39 @@ export const totalProt = atom<number>(0);
 
 export const getFoodnotes = action(foodNotes, 'Get All Foodnotes', (store) => {
     foodnotesLoading.set(true);
-    fetch(`${API_URL}/foodnote/all`, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    .then<GetFoodnotesResponse>((res) => res.json())
-    .then((res) => {
-        if ('error' in res) {
-            console.log('error:', res);
-        } else {
-            const { foodnotes } = res;
-            store.set(foodnotes);
-        }
-        foodnotesLoading.set(false);
-    });
+
+    getAllFoodnotes()
+        .then((res) => {
+            if ('error' in res) {
+                console.log('error:', res);
+            } else {
+                const { foodnotes } = res;
+                store.set(foodnotes);
+            }
+            foodnotesLoading.set(false);
+        });
 });
 
 export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
     const stringDate = date.toLocaleDateString();
     
-    fetch(`${API_URL}/foodnote`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ date: stringDate, foodId }),
-    })
-    .then((res) => res.json())
-    .then((foodnote: FoodNoteModel) => {
-        const toUpdate = store.get().filter((note) => note.date !== stringDate);
-        store.set([...toUpdate, foodnote]);
-    })
-    .catch((err) => console.log(err));
+    addFoodnote(foodId, date)
+        .then((foodnote: FoodNoteModel) => {
+            const toUpdate = store.get().filter((note) => note.date !== stringDate);
+            store.set([...toUpdate, foodnote]);
+        })
+        .catch((err) => console.log(err));
 });
 
 export const removeNote = action(foodNotes, 'Remove Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
     const stringDate = date.toLocaleDateString();
 
-    fetch(`${API_URL}/foodnote/remove-food`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ foodId, date: stringDate }),
-    })
-    .then((res) => res.json())
-    .then((foodnote: FoodNoteModel) => {
-        const toUpdate = store.get().filter((note) => note.date !== stringDate);
-        store.set([...toUpdate, foodnote]);
-    })
-    .catch((err) => console.log(err));
+    removeFoodnoteFood(foodId, date)
+        .then((foodnote: FoodNoteModel) => {
+            const toUpdate = store.get().filter((note) => note.date !== stringDate);
+            store.set([...toUpdate, foodnote]);
+        })
+        .catch((err) => console.log(err));
 });
 
 const updateTotals = (date: string) => {
