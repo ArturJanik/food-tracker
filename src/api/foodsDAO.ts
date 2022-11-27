@@ -3,6 +3,7 @@ import { FoodModel } from '../models/Food.model';
 
 interface GetAllFoodsResponse {
     foods: FoodModel[];
+    error?: any; 
 }
 
 export const getAllFoods = () => fetch(`${API_URL}/food/all`, {

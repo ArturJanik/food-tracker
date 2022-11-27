@@ -1,5 +1,5 @@
-import { action, atom } from 'nanostores';
-import { addFoodnote, getAllFoodnotes, removeFoodnoteFood } from '../api/foodnotes';
+import { action, atom, WritableAtom } from 'nanostores';
+import { addFoodnote, getAllFoodnotes, removeFoodnoteFood } from '../api/foodnotesDAO';
 import { FoodModel } from '../models/Food.model';
 import { FoodNoteModel } from '../models/FoodNote.model';
 import { foods } from './foods';
@@ -16,26 +16,30 @@ export const foodnotesLoading = atom(false);
 export const totalKcal = atom<number>(0);
 export const totalProt = atom<number>(0);
 
+const startLoadingFoodnotes = () => foodnotesLoading.set(true);
+
+const finishLoadingFoodnotes = () => foodnotesLoading.set(false);
+
+const populateStoreWithFoodnotes = (foodnotes: FoodNoteModel[], store: WritableAtom<FoodNoteModel[]>) => store.set(foodnotes);
+
 export const getFoodnotes = action(foodNotes, 'Get All Foodnotes', (store) => {
-    foodnotesLoading.set(true);
+    startLoadingFoodnotes();
 
     getAllFoodnotes()
         .then((res) => {
             if ('error' in res) {
                 console.log('error:', res);
             } else {
-                const { foodnotes } = res;
-                store.set(foodnotes);
+                populateStoreWithFoodnotes(res.foodnotes, store);
             }
-            foodnotesLoading.set(false);
-        });
+        })
+        .finally(finishLoadingFoodnotes);
 });
 
 export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
-    const stringDate = date.toLocaleDateString();
-    
     addFoodnote(foodId, date)
         .then((foodnote: FoodNoteModel) => {
+            const stringDate = date.toLocaleDateString();
             const toUpdate = store.get().filter((note) => note.date !== stringDate);
             store.set([...toUpdate, foodnote]);
         })
@@ -43,10 +47,9 @@ export const addNote = action(foodNotes, 'Add Foodnote', (store, { date, foodId 
 });
 
 export const removeNote = action(foodNotes, 'Remove Foodnote', (store, { date, foodId }: FoodnoteActionPayload) => {
-    const stringDate = date.toLocaleDateString();
-
     removeFoodnoteFood(foodId, date)
         .then((foodnote: FoodNoteModel) => {
+            const stringDate = date.toLocaleDateString();
             const toUpdate = store.get().filter((note) => note.date !== stringDate);
             store.set([...toUpdate, foodnote]);
         })
@@ -120,7 +123,7 @@ foodNotes.listen(() => {
 export const resetStore = () => {
     foodNotes.set([]);
     notedFoods.set([]);
-    foodnotesLoading.set(false);
+    finishLoadingFoodnotes();
     totalKcal.set(0);
     totalProt.set(0);
 };

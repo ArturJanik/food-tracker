@@ -1,5 +1,5 @@
-import { action, atom } from 'nanostores';
-import { getAllFoods, createFood } from '../api/foods';
+import { action, atom, WritableAtom } from 'nanostores';
+import { getAllFoods, createFood } from '../api/foodsDAO';
 import { FoodModel } from '../models/Food.model';
 
 interface CreateFoodActionPayload {
@@ -13,27 +13,33 @@ interface CreateFoodActionPayload {
 export const foods = atom<FoodModel[]>([]);
 export const foodsLoading = atom(false);
 
+const startLoadingFoods = () => foodsLoading.set(true);
+
+const finishLoadingFoods = () => foodsLoading.set(false);
+
+const populateStoreWithFoods = (foods: FoodModel[], store: WritableAtom<FoodModel[]>) => store.set(foods);
+
+const addNewFoodToStore = (store: WritableAtom<FoodModel[]>) => (food: FoodModel) => store.set([...store.get(), food]);
+
 export const getFoods = action(foods, 'Get All Foods', (store) => {
-    foodsLoading.set(true);
+    startLoadingFoods();
 
     getAllFoods()
         .then((res) => {
             if ('error' in res) {
                 console.log('error:', res);
-                foodsLoading.set(false);
             } else {
-                const { foods } = res;
-                store.set(foods);
-                foodsLoading.set(false);
+                populateStoreWithFoods(res.foods, store);
             }
-        });
+        })
+        .finally(finishLoadingFoods);
 });
 
 export const createNewFood = action(foods, 'Create Food', (store, data: CreateFoodActionPayload) => {
-    foodsLoading.set(true);
+    startLoadingFoods();
 
     createFood(data)
-        .then((food: FoodModel) => store.set([...store.get(), food]))
+        .then(addNewFoodToStore(store))
         .catch((err) => console.log(err))
-        .finally(() => foodsLoading.set(false));
+        .finally(finishLoadingFoods);
 });

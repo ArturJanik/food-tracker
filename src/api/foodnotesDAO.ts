@@ -1,7 +1,7 @@
 import { API_URL } from '../config/consts';
 import { FoodNoteModel } from '../models/FoodNote.model';
 
-interface GetFoodnotesResponse {
+interface GetAllFoodnotesResponse {
     foodnotes: FoodNoteModel[];
 }
 
@@ -10,7 +10,7 @@ export const getAllFoodnotes = () => fetch(`${API_URL}/foodnote/all`, {
         'Content-Type': 'application/json',
     },
 })
-.then<GetFoodnotesResponse>((res) => res.json());
+.then<GetAllFoodnotesResponse>((res) => res.json());
 
 export const addFoodnote = (foodId: string, date: Date) => {
     const stringDate = date.toLocaleDateString();
